@@ -57,7 +57,9 @@ def fetch_thumb(url):
 def main():
     data = load_json(ASSETS, {})
     items = data.get("items", [])
-    print(f"Loaded {len(items)} visual asset sources")
+    catalog = load_json(ROOT / "catalog.json", {})
+    catalog_count = len(catalog.get("items", []))
+    print(f"Loaded {len(items)} visual asset sources (main catalog: {catalog_count} items)")
 
     cache = load_json(THUMBS, {})
     found = 0
@@ -89,11 +91,11 @@ def main():
 
     payload = {"meta": data.get("meta", {}), "types": data.get("types", []),
                "licenses": data.get("licenses", []), "items": items}
-    html = render(json.dumps(payload, ensure_ascii=False))
+    html = render(json.dumps(payload, ensure_ascii=False), catalog_count)
     OUT.write_text(html, encoding="utf-8")
     print(f"Wrote {OUT} ({len(html)/1024:.0f} KB)")
 
-def render(data_json):
+def render(data_json, catalog_count):
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,7 +177,7 @@ def render(data_json):
 <body>
 <div class="wrap">
   <div class="nav">
-    <a href="index.html">← Full Catalog (all 104 resources)</a>
+    <a href="index.html">← Full Catalog (all __CATALOG_COUNT__ resources)</a>
     <span class="spacer"></span>
     <span class="pill">Visual Assets</span>
   </div>
@@ -266,7 +268,7 @@ init();
 </script>
 </body>
 </html>
-""".replace("__DATA__", data_json)
+""".replace("__DATA__", data_json).replace("__CATALOG_COUNT__", str(catalog_count))
 
 if __name__ == "__main__":
     main()

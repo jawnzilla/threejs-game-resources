@@ -6,6 +6,7 @@
   },
   "categories": [
     { "id": "core", "label": "Core & Frameworks", "icon": "🎮", "blurb": "The renderer itself plus the frameworks and engines built on top of it." },
+    { "id": "ai", "label": "AI Dev Tools & Agent Skills", "icon": "🤖", "blurb": "Skills packs, MCP servers and generation pipelines that let coding agents build Three.js games and assets." },
     { "id": "physics", "label": "Physics", "icon": "⚙️", "blurb": "Physics engines and React bindings for rigid bodies, joints and collisions." },
     { "id": "ecs", "label": "ECS & Architecture", "icon": "🧩", "blurb": "Entity-Component-System libraries, AI, steering and pathfinding." },
     { "id": "rendering", "label": "Rendering & Effects", "icon": "✨", "blurb": "Post-processing, BVH, particles, text, shaders and custom materials." },
@@ -34,6 +35,12 @@
     { "name": "Babylon.js", "url": "https://www.babylonjs.com/", "category": "core", "desc": "Full-featured WebGL/WebGPU engine. The main alternative to Three.js when you want batteries included.", "github": "BabylonJS/Babylon.js", "tags": ["free", "engine", "alternative"] },
     { "name": "PlayCanvas", "url": "https://playcanvas.com/", "category": "core", "desc": "Cloud-hosted WebGL game engine with an editor, used by many web games.", "tags": ["freemium", "engine", "alternative"] },
     { "name": "Godot Web Export", "url": "https://godotengine.org/", "category": "core", "desc": "Full 2D/3D game engine; its web export runs on WebGL — an option when you outgrow a library-only approach.", "tags": ["free", "engine", "alternative"] },
+
+    { "name": "img2threejs", "url": "https://github.com/img2threejs/img2threejs", "category": "ai", "desc": "Image-to-3D pipeline: rebuild an object from a reference image as a code-only, procedural, quality-gated, animation-ready Three.js model — token-efficient.", "github": "img2threejs/img2threejs", "tags": ["free", "tool"] },
+    { "name": "Three.js Awesome Graphics Agent Skills", "url": "https://github.com/scottstts/Threejs-Awesome-Graphics-Agent-Skills", "category": "ai", "desc": "Agent skill pack (Codex, Claude Code, Cursor, Copilot): mesh design, lighting, PBR, TSL/WebGPU & GLSL shaders, post-processing, particles, color management — graphics excellence as reusable skills.", "github": "scottstts/Threejs-Awesome-Graphics-Agent-Skills", "tags": ["free", "skills"] },
+    { "name": "Meng To / Skills (Vesper Fall)", "url": "https://github.com/MengTo/Skills", "category": "ai", "desc": "Open-source agent skills that built an isometric action RPG in Three.js — camera controls, VFX, audio, monster assets, combat systems. Playable game + asset catalog included.", "github": "MengTo/Skills", "tags": ["free", "skills"] },
+    { "name": "Mint MCP + threejs skills", "url": "https://github.com/mintdotgg/mint-threejs-skills", "category": "ai", "desc": "MCP server that turns a coding agent into a 3D engine: generate models, rig & animate, Gaussian-splat worlds, PBR materials, themed asset packs, audio/SFX, retopology, format conversion.", "github": "mintdotgg/mint-threejs-skills", "tags": ["free", "tool"] },
+    { "name": "GameBlocks", "url": "https://github.com/xt4d/GameBlocks", "category": "ai", "desc": "Open-source building blocks that help coding agents prototype browser 3D games — coordinate frames, actor motion, world structure as inspectable, known-good patterns.", "github": "xt4d/GameBlocks", "tags": ["free", "skills"] },
 
     { "name": "Rapier (Rust → WASM)", "url": "https://rapier.rs/", "category": "physics", "desc": "High-performance physics in Rust compiled to WASM. The recommended 3D physics engine for Three.js games in 2025+.", "github": "dimforge/rapier.js", "tags": ["free", "library"] },
     { "name": "react-three-rapier", "url": "https://github.com/pmndrs/react-three-rapier", "category": "physics", "desc": "React bindings for Rapier with instanced colliders, joints, sensors and debug rendering.", "github": "pmndrs/react-three-rapier", "tags": ["free", "library"] },
@@ -95,6 +102,7 @@
     { "name": "Three.js Journey", "url": "https://threejs-journey.com/", "category": "learning", "desc": "The most-recommended paid course (Bruno Simon) — includes physics, R3F, shaders and game-style projects.", "tags": ["paid", "course"] },
     { "name": "Discover Three.js", "url": "https://discoverthreejs.com/", "category": "learning", "desc": "Free in-depth book on Three.js fundamentals and a first game project — excellent for the core concepts.", "tags": ["free", "book"] },
     { "name": "SimonDev", "url": "https://simondev.io/", "category": "learning", "desc": "YouTube channel + courses focused specifically on Three.js game development (FPS, terrain, AI).", "tags": ["freemium", "course"] },
+    { "name": "Procedural Terrain Techniques (thread)", "url": "https://x.com/iced_coffee_dev/status/2084276803833581736", "category": "learning", "desc": "Viral technique thread on better procedural terrain: heightmaps, fBM, ridged & Voronoi noise, noise-derivative erosion, terraces, Crytek height fog, extinction vs in-scattering fog. Live demo: simondev.io/demos/gamedev.", "tags": ["free", "tutorial"] },
     { "name": "Wawa Sensei", "url": "https://wawasensei.dev/", "category": "learning", "desc": "Free React Three Fiber course and tutorials — physics, models, scroll, optimization.", "tags": ["free", "course"] },
     { "name": "Game Development with Three.js (book)", "url": "https://gamefromscratch.com/new-book-game-development-with-three-js/", "category": "learning", "desc": "Book dedicated to building games with Three.js — from scene setup to game loops.", "tags": ["paid", "book"] },
     { "name": "Three.js Fundamentals", "url": "https://threejsfundamentals.org/", "category": "learning", "desc": "Free, deeply-written tutorials on every Three.js topic, including games and performance.", "tags": ["free", "tutorial"] },
@@ -123,6 +131,7 @@
     { "name": "Keep Out", "url": "http://www.playkeepout.com/", "category": "showcase", "desc": "Crawler/dungeon game made with Three.js — playable browser RPG.", "tags": ["free", "game"] },
     { "name": "Wind Waker (Web)", "url": "https://wind-waker-threejs.com/", "category": "showcase", "desc": "Legend of Zelda Wind Waker recreation in Three.js — cel shading and stylized water study.", "tags": ["free", "game"] },
     { "name": "Putt Day", "url": "https://putt.day/", "category": "showcase", "desc": "Daily mini-golf in the browser — tight physics and short sessions.", "tags": ["free", "game"] },
+    { "name": "Vesper Fall", "url": "https://vesperfall.mengto.chatgpt.site/", "category": "showcase", "desc": "Playable isometric action RPG built with Three.js agent skills — camera, VFX, audio, combat, monsters. Assets open-sourced via its asset catalog.", "tags": ["free", "game"] },
 
     { "name": "vite-three-js template", "url": "https://github.com/doinel1a/vite-three-js", "category": "templates", "desc": "Vite + Three.js starter template with hot reload, ESLint and structure out of the box.", "github": "doinel1a/vite-three-js", "tags": ["free", "template"] },
     { "name": "Three.js TypeScript Boilerplate", "url": "https://sbcode.net/threejs/create-threejs-boilerplate/", "category": "templates", "desc": "Sean Bradley's guide + boilerplate for a Vite + TypeScript Three.js project.", "tags": ["free", "template"] },

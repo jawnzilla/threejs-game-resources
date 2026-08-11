@@ -4,19 +4,20 @@ A curated, searchable catalog of **104 resources** for building games with [Thre
 
 ## 🌐 View it live
 
-> **https://jawnzilla.github.io/threejs-game-resources/** — full catalog (104 resources)
+> **https://jawnzilla.github.io/threejs-game-resources/** — full catalog (111 resources)
 > **https://jawnzilla.github.io/threejs-game-resources/assets.html** — 🖼️ Visual Asset Browser (thumbnails)
 
 Two pages, both generated from data files:
 
 - **`index.html`** — the full searchable/filterable catalog of engines, libraries, tools, learning and showcases, with live GitHub ★ counts.
-- **`assets.html`** — the **Visual Asset Browser**: a thumbnail grid of 27 curated sources for 3D models, textures, HDRIs, characters & animations, 2D/UI art, voxel tools and marketplaces. Filter by type and license (CC0 / Free / Freemium / Paid), search by keyword. Thumbnails are pulled from each site's og:image at build time (favicon fallback).
+- **`assets.html`** — the **Visual Asset Browser**: a thumbnail grid of 30 curated sources for 3D models, textures, HDRIs, characters & animations, 2D/UI art, voxel tools, marketplaces and AI-generation tools. Filter by type and license (CC0 / Free / Freemium / Paid), search by keyword. Thumbnails are pulled from each site's og:image at build time (favicon fallback).
 
 ## 📦 What's inside
 
 | Category | What you'll find |
 |---|---|
 | 🎮 Core & Frameworks | Three.js, react-three-fiber, drei, A-Frame, Needle, Rogue, Babylon/PlayCanvas/Godot alternatives |
+| 🤖 AI Dev Tools & Agent Skills | img2threejs, graphics agent skills, Meng To's RPG skills, Mint MCP, GameBlocks |
 | ⚙️ Physics | Rapier (WASM), cannon-es, Ammo.js + React bindings |
 | 🧩 ECS & Architecture | ECSY, bitecs, Yuka AI, navmesh pathfinding (recast, three-pathfinding) |
 | ✨ Rendering & Effects | postprocessing, BVH, particles, text, IK, Theatre.js timelines, shaders |

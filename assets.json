@@ -11,7 +11,8 @@
     { "id": "2d", "label": "2D & UI Art", "icon": "🖼️" },
     { "id": "voxel", "label": "Voxel Tools", "icon": "🧱" },
     { "id": "marketplace", "label": "Marketplaces", "icon": "🏪" },
-    { "id": "tool", "label": "Tools & Editors", "icon": "🛠️" }
+    { "id": "tool", "label": "Tools & Editors", "icon": "🛠️" },
+    { "id": "generation", "label": "AI Generation", "icon": "🤖" }
   ],
   "licenses": [
     { "id": "cc0", "label": "CC0", "color": "#34d399" },
@@ -52,6 +53,10 @@
     { "name": "OpenGameArt — All", "url": "https://opengameart.org/", "site": "https://opengameart.org/", "type": "marketplace", "license": "free", "desc": "Community hub for free game art — 3D models, sprites, textures, sounds and music." },
 
     { "name": "Blender", "url": "https://www.blender.org/", "site": "https://www.blender.org/", "type": "tool", "license": "free", "desc": "Free 3D suite with first-class glTF export — the standard companion to Three.js." },
-    { "name": "Spline", "url": "https://spline.design/", "site": "https://spline.design/", "type": "tool", "license": "freemium", "desc": "Browser 3D design tool with a Three.js runtime — fast for UI scenes and interactive objects." }
+    { "name": "Spline", "url": "https://spline.design/", "site": "https://spline.design/", "type": "tool", "license": "freemium", "desc": "Browser 3D design tool with a Three.js runtime — fast for UI scenes and interactive objects." },
+
+    { "name": "img2threejs", "url": "https://github.com/img2threejs/img2threejs", "site": "https://img2threejs.github.io/img2threejs-showcase/", "type": "generation", "license": "free", "desc": "Turn a reference image into a procedural, animation-ready Three.js model — code-only, quality-gated and token-efficient." },
+    { "name": "Mint MCP", "url": "https://mcp.mint.gg/", "site": "https://mcp.mint.gg/", "type": "generation", "license": "freemium", "desc": "MCP server that generates 3D models, PBR materials, themed asset packs, rigs, animations, Gaussian-splat worlds and audio for your coding agent." },
+    { "name": "Vesper Fall Asset Catalog", "url": "https://vesperfall.mengto.chatgpt.site/asset-catalog", "site": "https://vesperfall.mengto.chatgpt.site/asset-catalog", "type": "models", "license": "free", "desc": "Open-sourced monster and character assets from the Vesper Fall isometric ARPG, generated with agent skills." }
   ]
 }
