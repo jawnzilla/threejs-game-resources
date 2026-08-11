@@ -100,6 +100,7 @@ def render(data_json):
   <div class="nav">
     <a href="index.html">← Full Catalog</a>
     <a href="assets.html">🖼️ Visual Assets</a>
+    <a href="workflow.html">◆ Spec Forge</a>
     <span class="spacer"></span>
     <span class="pill">Cheat Sheet</span>
   </div>

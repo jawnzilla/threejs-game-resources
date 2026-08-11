@@ -190,6 +190,11 @@ def render(data_json):
     <div class="stats" id="stats"></div>
   </header>
   <div class="banners">
+    <a class="banner" href="workflow.html">
+      <span class="banner-icon">◆</span>
+      <span class="banner-text"><b>Game Specification Forge</b> — decide the game step by step, then export a bounded Gauntlet handoff</span>
+      <span class="banner-arrow">→</span>
+    </a>
     <a class="banner" href="assets.html">
       <span class="banner-icon">🖼️</span>
       <span class="banner-text"><b>Visual Asset Browser</b> — browse models, textures, HDRIs, characters & 2D art with thumbnails</span>
