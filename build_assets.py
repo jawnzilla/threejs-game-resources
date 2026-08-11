@@ -179,6 +179,7 @@ def render(data_json, catalog_count):
   <div class="nav">
     <a href="index.html">← Full Catalog (all __CATALOG_COUNT__ resources)</a>
     <a href="cheatsheet.html">📋 Cheat Sheet</a>
+    <a href="workflow.html">◆ Spec Forge</a>
     <span class="spacer"></span>
     <span class="pill">Visual Assets</span>
   </div>
