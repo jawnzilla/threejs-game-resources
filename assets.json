@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "title": "Visual Asset Browser",
+    "subtitle": "Curated sources for 3D models, textures, HDRIs, characters, animations and 2D game art — with thumbnails for quick visual browsing.",
+    "updated": "2026-08-10"
+  },
+  "types": [
+    { "id": "models", "label": "3D Models", "icon": "🧊" },
+    { "id": "textures", "label": "Textures & HDRIs", "icon": "🎨" },
+    { "id": "characters", "label": "Characters & Animation", "icon": "🧍" },
+    { "id": "2d", "label": "2D & UI Art", "icon": "🖼️" },
+    { "id": "voxel", "label": "Voxel Tools", "icon": "🧱" },
+    { "id": "marketplace", "label": "Marketplaces", "icon": "🏪" },
+    { "id": "tool", "label": "Tools & Editors", "icon": "🛠️" }
+  ],
+  "licenses": [
+    { "id": "cc0", "label": "CC0", "color": "#34d399" },
+    { "id": "free", "label": "Free", "color": "#38bdf8" },
+    { "id": "freemium", "label": "Freemium", "color": "#fbbf24" },
+    { "id": "paid", "label": "Paid", "color": "#f87171" }
+  ],
+  "items": [
+    { "name": "Poly Pizza", "url": "https://poly.pizza/", "site": "https://poly.pizza/", "type": "models", "license": "cc0", "desc": "Thousands of free CC0 3D models, searchable by category with one-click glTF/GLB downloads." },
+    { "name": "Kenney", "url": "https://kenney.nl/assets", "site": "https://kenney.nl/", "type": "models", "license": "cc0", "desc": "The indie gold standard — 40k+ CC0 models, UI packs, textures, fonts and audio for every genre." },
+    { "name": "Quaternius", "url": "https://quaternius.com/", "site": "https://quaternius.com/", "type": "models", "license": "cc0", "desc": "Ultimate low-poly pack library — animals, vehicles, buildings, characters, many pre-animated." },
+    { "name": "Poly Haven — Models", "url": "https://polyhaven.com/models", "site": "https://polyhaven.com/", "type": "models", "license": "cc0", "desc": "Small but gorgeous CC0 model library — plants, props, rocks and studio sets." },
+    { "name": "Khronos glTF Sample Models", "url": "https://github.com/KhronosGroup/glTF-Sample-Models", "site": "https://github.com/KhronosGroup/glTF-Sample-Models", "type": "models", "license": "free", "desc": "The official reference glTF models — perfect for testing loaders, PBR, skinning and animation." },
+
+    { "name": "ambientCG", "url": "https://ambientcg.com/", "site": "https://ambientcg.com/", "type": "textures", "license": "cc0", "desc": "10,000+ CC0 PBR texture sets — albedo, normal, roughness, metalness at every resolution." },
+    { "name": "Poly Haven — Textures", "url": "https://polyhaven.com/textures", "site": "https://polyhaven.com/", "type": "textures", "license": "cc0", "desc": "Beautiful CC0 PBR textures with physically-based maps and multiple resolutions." },
+    { "name": "Poly Haven — HDRIs", "url": "https://polyhaven.com/hdris", "site": "https://polyhaven.com/", "type": "textures", "license": "cc0", "desc": "Free CC0 HDRIs for environment lighting and reflections — the standard source." },
+    { "name": "3DTextures.me", "url": "https://3dtextures.me/", "site": "https://3dtextures.me/", "type": "textures", "license": "free", "desc": "Large free PBR texture library with all maps included for each material." },
+    { "name": "textures.com", "url": "https://www.textures.com/", "site": "https://www.textures.com/", "type": "textures", "license": "freemium", "desc": "Massive commercial texture library — free account earns daily credits." },
+
+    { "name": "Mixamo", "url": "https://www.mixamo.com/", "site": "https://www.mixamo.com/", "type": "characters", "license": "free", "desc": "Adobe's free auto-rigged characters and 2,500+ animations with FBX/glTF export." },
+    { "name": "Ready Player Me", "url": "https://readyplayer.me/", "site": "https://readyplayer.me/", "type": "characters", "license": "free", "desc": "Cross-game avatar creator — build and export GLB avatars for your Three.js game." },
+    { "name": "Rokoko Free Mocap", "url": "https://www.rokoko.com/free-mocap", "site": "https://www.rokoko.com/free-mocap", "type": "characters", "license": "free", "desc": "Thousands of free motion-capture clips for animating characters — great for testing rigs." },
+    { "name": "glTF Avatar Samples", "url": "https://github.com/KhronosGroup/glTF-Sample-Assets", "site": "https://github.com/KhronosGroup/glTF-Sample-Assets", "type": "characters", "license": "free", "desc": "Official Khronos sample assets incl. rigged, skinned characters for animation testing." },
+
+    { "name": "game-icons.net", "url": "https://game-icons.net/", "site": "https://game-icons.net/", "type": "2d", "license": "free", "desc": "4,000+ free game icons (CC BY 3.0) as SVG/PNG — perfect for UI, pickups and abilities." },
+    { "name": "CraftPix", "url": "https://craftpix.net/", "site": "https://craftpix.net/", "type": "2d", "license": "freemium", "desc": "Game art marketplace — sprites, tilesets, UI kits; free packs released weekly." },
+    { "name": "OpenGameArt — 2D", "url": "https://opengameart.org/art-search-advanced?field_art_type_tid%5B%5D=9", "site": "https://opengameart.org/", "type": "2d", "license": "free", "desc": "Huge community library of sprites, tilesets, characters and icons — filter by license." },
+    { "name": "itch.io — Free Assets", "url": "https://itch.io/game-assets/free", "site": "https://itch.io/game-assets", "type": "2d", "license": "free", "desc": "Thousands of free asset packs from indie artists — models, sprites, VFX, UI." },
+
+    { "name": "Blockbench", "url": "https://www.blockbench.net/", "site": "https://www.blockbench.net/", "type": "voxel", "license": "free", "desc": "Free low-poly/voxel modeling tool — Minecraft-style models, animation, glTF/OBJ export." },
+    { "name": "MagicaVoxel", "url": "https://ephtracy.github.io/", "site": "https://ephtracy.github.io/", "type": "voxel", "license": "free", "desc": "The legendary free voxel editor — sculpt voxel scenes and export OBJ/PLY to Three.js." },
+
+    { "name": "Sketchfab", "url": "https://sketchfab.com/", "site": "https://sketchfab.com/", "type": "marketplace", "license": "freemium", "desc": "The biggest 3D model marketplace — huge free CC section with glTF/GLB downloads." },
+    { "name": "FAB (Epic)", "url": "https://fab.com/", "site": "https://fab.com/", "type": "marketplace", "license": "freemium", "desc": "Epic's cross-engine marketplace (Quixel + Sketchfab) — large free CC0 tier." },
+    { "name": "TurboSquid", "url": "https://www.turbosquid.com/", "site": "https://www.turbosquid.com/", "type": "marketplace", "license": "paid", "desc": "Massive commercial marketplace with a dedicated free 3D models section." },
+    { "name": "CGTrader", "url": "https://www.cgtrader.com/", "site": "https://www.cgtrader.com/", "type": "marketplace", "license": "paid", "desc": "Big marketplace — filter by free, thousands of royalty-free models." },
+    { "name": "OpenGameArt — All", "url": "https://opengameart.org/", "site": "https://opengameart.org/", "type": "marketplace", "license": "free", "desc": "Community hub for free game art — 3D models, sprites, textures, sounds and music." },
+
+    { "name": "Blender", "url": "https://www.blender.org/", "site": "https://www.blender.org/", "type": "tool", "license": "free", "desc": "Free 3D suite with first-class glTF export — the standard companion to Three.js." },
+    { "name": "Spline", "url": "https://spline.design/", "site": "https://spline.design/", "type": "tool", "license": "freemium", "desc": "Browser 3D design tool with a Three.js runtime — fast for UI scenes and interactive objects." }
+  ]
+}

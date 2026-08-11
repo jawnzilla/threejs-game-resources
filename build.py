@@ -137,6 +137,18 @@ def render(data_json):
   .chip.active {
     background: var(--accent); border-color: var(--accent); color: #06281c; font-weight: 600;
   }
+  .banner {
+    display: flex; align-items: center; gap: 12px; margin: 4px 0 20px;
+    padding: 14px 18px; border-radius: 14px; text-decoration: none;
+    background: linear-gradient(90deg, #12332c, #12263a);
+    border: 1px solid #1f5f52; color: var(--text);
+    transition: border-color .12s ease, transform .12s ease;
+  }
+  .banner:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .banner-icon { font-size: 1.6rem; }
+  .banner-text { flex: 1; font-size: .95rem; color: var(--muted); }
+  .banner-text b { color: var(--text); }
+  .banner-arrow { color: var(--accent); font-size: 1.3rem; font-weight: 700; }
   .grid {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 14px; margin-top: 24px;
@@ -175,6 +187,11 @@ def render(data_json):
     <p class="sub" id="subtitle"></p>
     <div class="stats" id="stats"></div>
   </header>
+  <a class="banner" href="assets.html">
+    <span class="banner-icon">🖼️</span>
+    <span class="banner-text"><b>Visual Asset Browser</b> — browse models, textures, HDRIs, characters & 2D art with thumbnails</span>
+    <span class="banner-arrow">→</span>
+  </a>
   <div class="controls">
     <input id="search" type="search" placeholder="Search resources — e.g. physics, multiplayer, text, particles...">
     <div class="chips" id="chips"></div>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Asset Browser — Three.js</title>
+<style>
+  :root {
+    --bg: #0b0f17; --panel: #121826; --border: #1f2a3d;
+    --text: #e6edf6; --muted: #8b98ab; --accent: #6ee7b7; --accent2: #38bdf8;
+    --chip: #1a2436; --chip-hover: #22304a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif; line-height: 1.5;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 32px 20px 80px; }
+  .nav { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; font-size: .9rem; }
+  .nav a { color: var(--accent2); text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+  .nav .spacer { flex: 1; }
+  .nav .pill { color: var(--muted); border: 1px solid var(--border); padding: 4px 12px; border-radius: 999px; }
+  header { margin-bottom: 24px; }
+  header h1 {
+    font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header p.sub { color: var(--muted); margin-top: 6px; max-width: 760px; }
+  .stats { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .stat { background: var(--panel); border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; font-size: .85rem; color: var(--muted); }
+  .stat b { color: var(--text); }
+  .controls { position: sticky; top: 0; z-index: 10; padding: 12px 0; background: var(--bg); }
+  #search {
+    width: 100%; padding: 12px 16px; border-radius: 12px;
+    background: var(--panel); border: 1px solid var(--border); color: var(--text);
+    font-size: 1rem; outline: none;
+  }
+  #search:focus { border-color: var(--accent2); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .chip {
+    background: var(--chip); border: 1px solid var(--border); color: var(--muted);
+    padding: 6px 12px; border-radius: 999px; cursor: pointer; font-size: .82rem;
+    user-select: none; transition: all .12s ease;
+  }
+  .chip:hover { background: var(--chip-hover); color: var(--text); }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: #06281c; font-weight: 600; }
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px; margin-top: 24px;
+  }
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform .12s ease, border-color .12s ease;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--accent2); }
+  .thumb { aspect-ratio: 16 / 10; background: #1a2436; position: relative; overflow: hidden; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb .ph {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; font-weight: 800; color: rgba(230, 237, 246, .28);
+    background: linear-gradient(135deg, #182236, #101a2b);
+  }
+  .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .body .top { display: flex; align-items: center; gap: 6px; }
+  .body .icon { font-size: 1.1rem; }
+  .body h3 { font-size: 1rem; font-weight: 700; }
+  .body h3 a { color: var(--text); text-decoration: none; }
+  .body h3 a:hover { color: var(--accent2); text-decoration: underline; }
+  .lic { margin-left: auto; font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .body .desc { color: var(--muted); font-size: .86rem; flex: 1; }
+  .empty { color: var(--muted); text-align: center; padding: 60px 0; display: none; }
+  footer { color: var(--muted); font-size: .8rem; margin-top: 40px; text-align: center; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="nav">
+    <a href="index.html">← Full Catalog (all 104 resources)</a>
+    <span class="spacer"></span>
+    <span class="pill">Visual Assets</span>
+  </div>
+  <header>
+    <h1 id="title">Visual Asset Browser</h1>
+    <p class="sub" id="subtitle"></p>
+    <div class="stats" id="stats"></div>
+  </header>
+  <div class="controls">
+    <input id="search" type="search" placeholder="Search visual assets — e.g. characters, textures, voxel...">
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">No sources match. Try a different filter.</div>
+  <footer>Curated for Three.js game dev · Updated <span id="updated"></span> · Thumbnails pulled from each site's og:image · License labels are the sites' default terms — always verify before shipping</footer>
+</div>
+<script id="asset-data" type="application/json">{"meta": {"title": "Visual Asset Browser", "subtitle": "Curated sources for 3D models, textures, HDRIs, characters, animations and 2D game art — with thumbnails for quick visual browsing.", "updated": "2026-08-10"}, "types": [{"id": "models", "label": "3D Models", "icon": "🧊"}, {"id": "textures", "label": "Textures & HDRIs", "icon": "🎨"}, {"id": "characters", "label": "Characters & Animation", "icon": "🧍"}, {"id": "2d", "label": "2D & UI Art", "icon": "🖼️"}, {"id": "voxel", "label": "Voxel Tools", "icon": "🧱"}, {"id": "marketplace", "label": "Marketplaces", "icon": "🏪"}, {"id": "tool", "label": "Tools & Editors", "icon": "🛠️"}], "licenses": [{"id": "cc0", "label": "CC0", "color": "#34d399"}, {"id": "free", "label": "Free", "color": "#38bdf8"}, {"id": "freemium", "label": "Freemium", "color": "#fbbf24"}, {"id": "paid", "label": "Paid", "color": "#f87171"}], "items": [{"name": "Poly Pizza", "url": "https://poly.pizza/", "site": "https://poly.pizza/", "type": "models", "license": "cc0", "desc": "Thousands of free CC0 3D models, searchable by category with one-click glTF/GLB downloads.", "thumb": "https://poly.pizza/img/socialPreview.jpg"}, {"name": "Kenney", "url": "https://kenney.nl/assets", "site": "https://kenney.nl/", "type": "models", "license": "cc0", "desc": "The indie gold standard — 40k+ CC0 models, UI packs, textures, fonts and audio for every genre.", "thumb": "https://kenney.nl/data/img/kenney-promo.png"}, {"name": "Quaternius", "url": "https://quaternius.com/", "site": "https://quaternius.com/", "type": "models", "license": "cc0", "desc": "Ultimate low-poly pack library — animals, vehicles, buildings, characters, many pre-animated.", "thumb": "https://quaternius.com/assets/images/fullres/metadata.jpg"}, {"name": "Poly Haven — Models", "url": "https://polyhaven.com/models", "site": "https://polyhaven.com/", "type": "models", "license": "cc0", "desc": "Small but gorgeous CC0 model library — plants, props, rocks and studio sets.", "thumb": "https://cdn.polyhaven.com/site_images/home/window_rend.jpg?width=630&amp;quality=95"}, {"name": "Khronos glTF Sample Models", "url": "https://github.com/KhronosGroup/glTF-Sample-Models", "site": "https://github.com/KhronosGroup/glTF-Sample-Models", "type": "models", "license": "free", "desc": "The official reference glTF models — perfect for testing loaders, PBR, skinning and animation.", "thumb": "https://opengraph.githubassets.com/d6f7d14c130a2b514b819f175524a2098ee0a9f1950d0c755145b2c534d3a366/KhronosGroup/glTF-Sample-Models"}, {"name": "ambientCG", "url": "https://ambientcg.com/", "site": "https://ambientcg.com/", "type": "textures", "license": "cc0", "desc": "10,000+ CC0 PBR texture sets — albedo, normal, roughness, metalness at every resolution.", "thumb": "https://ambientcg.com/api/metaimage-list"}, {"name": "Poly Haven — Textures", "url": "https://polyhaven.com/textures", "site": "https://polyhaven.com/", "type": "textures", "license": "cc0", "desc": "Beautiful CC0 PBR textures with physically-based maps and multiple resolutions.", "thumb": "https://cdn.polyhaven.com/site_images/home/window_rend.jpg?width=630&amp;quality=95"}, {"name": "Poly Haven — HDRIs", "url": "https://polyhaven.com/hdris", "site": "https://polyhaven.com/", "type": "textures", "license": "cc0", "desc": "Free CC0 HDRIs for environment lighting and reflections — the standard source.", "thumb": "https://cdn.polyhaven.com/site_images/home/window_rend.jpg?width=630&amp;quality=95"}, {"name": "3DTextures.me", "url": "https://3dtextures.me/", "site": "https://3dtextures.me/", "type": "textures", "license": "free", "desc": "Large free PBR texture library with all maps included for each material.", "thumb": "https://i0.wp.com/3dtextures.me/wp-content/uploads/2019/01/3dtextures.png?fit=180%2C180&#038;ssl=1"}, {"name": "textures.com", "url": "https://www.textures.com/", "site": "https://www.textures.com/", "type": "textures", "license": "freemium", "desc": "Massive commercial texture library — free account earns daily credits.", "thumb": "https://www.textures.com/icon_180x180.376d2039520513b21c8859e65191c328.png"}, {"name": "Mixamo", "url": "https://www.mixamo.com/", "site": "https://www.mixamo.com/", "type": "characters", "license": "free", "desc": "Adobe's free auto-rigged characters and 2,500+ animations with FBX/glTF export.", "thumb": "https://www.google.com/s2/favicons?domain=www.mixamo.com&sz=128"}, {"name": "Ready Player Me", "url": "https://readyplayer.me/", "site": "https://readyplayer.me/", "type": "characters", "license": "free", "desc": "Cross-game avatar creator — build and export GLB avatars for your Three.js game.", "thumb": "https://www.google.com/s2/favicons?domain=readyplayer.me&sz=128"}, {"name": "Rokoko Free Mocap", "url": "https://www.rokoko.com/free-mocap", "site": "https://www.rokoko.com/free-mocap", "type": "characters", "license": "free", "desc": "Thousands of free motion-capture clips for animating characters — great for testing rigs.", "thumb": "https://www.google.com/s2/favicons?domain=www.rokoko.com&sz=128"}, {"name": "glTF Avatar Samples", "url": "https://github.com/KhronosGroup/glTF-Sample-Assets", "site": "https://github.com/KhronosGroup/glTF-Sample-Assets", "type": "characters", "license": "free", "desc": "Official Khronos sample assets incl. rigged, skinned characters for animation testing.", "thumb": "https://opengraph.githubassets.com/16df8596486baa2ba31f085fff17064fb46308b7964533955ce933e3b7840a92/KhronosGroup/glTF-Sample-Assets"}, {"name": "game-icons.net", "url": "https://game-icons.net/", "site": "https://game-icons.net/", "type": "2d", "license": "free", "desc": "4,000+ free game icons (CC BY 3.0) as SVG/PNG — perfect for UI, pickups and abilities.", "thumb": "https://www.google.com/s2/favicons?domain=game-icons.net&sz=128"}, {"name": "CraftPix", "url": "https://craftpix.net/", "site": "https://craftpix.net/", "type": "2d", "license": "freemium", "desc": "Game art marketplace — sprites, tilesets, UI kits; free packs released weekly.", "thumb": "https://www.google.com/s2/favicons?domain=craftpix.net&sz=128"}, {"name": "OpenGameArt — 2D", "url": "https://opengameart.org/art-search-advanced?field_art_type_tid%5B%5D=9", "site": "https://opengameart.org/", "type": "2d", "license": "free", "desc": "Huge community library of sprites, tilesets, characters and icons — filter by license.", "thumb": "https://www.google.com/s2/favicons?domain=opengameart.org&sz=128"}, {"name": "itch.io — Free Assets", "url": "https://itch.io/game-assets/free", "site": "https://itch.io/game-assets", "type": "2d", "license": "free", "desc": "Thousands of free asset packs from indie artists — models, sprites, VFX, UI.", "thumb": "https://img.itch.zone/aW1nLzI5MTc5OTM4LnBuZw==/508x254%23mb/nonp%2BM.png"}, {"name": "Blockbench", "url": "https://www.blockbench.net/", "site": "https://www.blockbench.net/", "type": "voxel", "license": "free", "desc": "Free low-poly/voxel modeling tool — Minecraft-style models, animation, glTF/OBJ export.", "thumb": "https://blockbench.net/logo_banner.png"}, {"name": "MagicaVoxel", "url": "https://ephtracy.github.io/", "site": "https://ephtracy.github.io/", "type": "voxel", "license": "free", "desc": "The legendary free voxel editor — sculpt voxel scenes and export OBJ/PLY to Three.js.", "thumb": "https://www.google.com/s2/favicons?domain=ephtracy.github.io&sz=128"}, {"name": "Sketchfab", "url": "https://sketchfab.com/", "site": "https://sketchfab.com/", "type": "marketplace", "license": "freemium", "desc": "The biggest 3D model marketplace — huge free CC section with glTF/GLB downloads.", "thumb": "https://static.sketchfab.com/static/builds/web/dist/static/assets/images/favicon/a81e1fd93fc053fed8a5f56640f886f8-v2.png"}, {"name": "FAB (Epic)", "url": "https://fab.com/", "site": "https://fab.com/", "type": "marketplace", "license": "freemium", "desc": "Epic's cross-engine marketplace (Quixel + Sketchfab) — large free CC0 tier.", "thumb": "https://static.fab.com/static/builds/web/dist/frontend/assets/images/seo/fdf942ac474b5c4825413520bb6fd4eb-v1.webp"}, {"name": "TurboSquid", "url": "https://www.turbosquid.com/", "site": "https://www.turbosquid.com/", "type": "marketplace", "license": "paid", "desc": "Massive commercial marketplace with a dedicated free 3D models section.", "thumb": "https://www.google.com/s2/favicons?domain=www.turbosquid.com&sz=128"}, {"name": "CGTrader", "url": "https://www.cgtrader.com/", "site": "https://www.cgtrader.com/", "type": "marketplace", "license": "paid", "desc": "Big marketplace — filter by free, thousands of royalty-free models.", "thumb": "https://assets.cgtrader.com/assets/branding/avatar-d9199bb4f8e1938e1bd58ba746948741ce297b4174526fa3a18eefd0d5bbc03f.jpg"}, {"name": "OpenGameArt — All", "url": "https://opengameart.org/", "site": "https://opengameart.org/", "type": "marketplace", "license": "free", "desc": "Community hub for free game art — 3D models, sprites, textures, sounds and music.", "thumb": "https://www.google.com/s2/favicons?domain=opengameart.org&sz=128"}, {"name": "Blender", "url": "https://www.blender.org/", "site": "https://www.blender.org/", "type": "tool", "license": "free", "desc": "Free 3D suite with first-class glTF export — the standard companion to Three.js.", "thumb": "https://www.blender.org/wp-content/uploads/2026/07/blender_52_panthera_joanna_kobierska-480x270.jpg"}, {"name": "Spline", "url": "https://spline.design/", "site": "https://spline.design/", "type": "tool", "license": "freemium", "desc": "Browser 3D design tool with a Three.js runtime — fast for UI scenes and interactive objects.", "thumb": "https://spline.design/_next/static/media/spline_image_banner.77c2eb63.png"}]}</script>
+<script>
+const DATA = JSON.parse(document.getElementById('asset-data').textContent);
+const { items, types, licenses, meta } = DATA;
+const state = { type: 'all', lic: 'all', q: '' };
+const $ = sel => document.querySelector(sel);
+
+function init() {
+  $('#title').textContent = meta.title;
+  $('#subtitle').textContent = meta.subtitle;
+  $('#updated').textContent = meta.updated;
+  const cc0 = items.filter(i => i.license === 'cc0').length;
+  const withThumb = items.filter(i => i.thumb).length;
+  $('#stats').innerHTML =
+    `<span class="stat"><b>${items.length}</b> sources</span>` +
+    `<span class="stat"><b>${types.length}</b> types</span>` +
+    `<span class="stat"><b>${cc0}</b> CC0</span>` +
+    `<span class="stat"><b>${withThumb}/${items.length}</b> with thumbnails</span>`;
+
+  const typeChips = `<div class="chip active" data-type="all">All types</div>` +
+    types.map(t => `<div class="chip" data-type="${t.id}">${t.icon} ${t.label}</div>`).join('');
+  const licChips = `<div class="chip active" data-lic="all">Any license</div>` +
+    licenses.map(l => `<div class="chip" data-lic="${l.id}" style="--lc:${l.color}">${l.label}</div>`).join('');
+  $('#chips').innerHTML = typeChips + licChips;
+
+  document.querySelectorAll('[data-type]').forEach(chip =>
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('[data-type]').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active'); state.type = chip.dataset.type; render();
+    }));
+  document.querySelectorAll('[data-lic]').forEach(chip =>
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('[data-lic]').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active'); state.lic = chip.dataset.lic; render();
+    }));
+  $('#search').addEventListener('input', e => { state.q = e.target.value.trim().toLowerCase(); render(); });
+  render();
+}
+
+function matches(it) {
+  if (state.type !== 'all' && it.type !== state.type) return false;
+  if (state.lic !== 'all' && it.license !== state.lic) return false;
+  if (!state.q) return true;
+  return [it.name, it.desc, it.type].join(' ').toLowerCase().includes(state.q);
+}
+
+function render() {
+  const visible = items.filter(matches);
+  const lic = l => licenses.find(x => x.id === l);
+  $('#grid').innerHTML = visible.map(it => {
+    const t = types.find(x => x.id === it.type);
+    const l = lic(it.license);
+    const thumb = it.thumb
+      ? `<img src="${it.thumb}" alt="${it.name}" loading="lazy" onerror="this.outerHTML='<div class=\'ph\'>${it.name[0]}</div>'">`
+      : `<div class="ph">${it.name[0]}</div>`;
+    return `<div class="card">
+      <div class="thumb">${thumb}</div>
+      <div class="body">
+        <div class="top"><span class="icon">${t.icon}</span>
+          <h3><a href="${it.url}" target="_blank" rel="noopener">${it.name}</a></h3>
+          <span class="lic" style="background:${l.color}22;color:${l.color}">${l.label}</span>
+        </div>
+        <div class="desc">${it.desc}</div>
+      </div>
+    </div>`;
+  }).join('');
+  $('#empty').style.display = visible.length ? 'none' : 'block';
+  document.title = `${meta.title} — ${visible.length} results`;
+}
+
+init();
+</script>
+</body>
+</html>
