@@ -14,7 +14,7 @@ Four pages, all generated from data files:
 - **`index.html`** — the full searchable/filterable catalog of engines, libraries, tools, learning and showcases, with live GitHub ★ counts.
 - **`assets.html`** — the **Visual Asset Browser**: a thumbnail grid of 30 curated sources for 3D models, textures, HDRIs, characters & animations, 2D/UI art, voxel tools, marketplaces and AI-generation tools. Filter by type and license (CC0 / Free / Freemium / Paid), search by keyword. Thumbnails are pulled from each site's og:image at build time (favicon fallback).
 - **`cheatsheet.html`** — the **Agent Skills Cheat Sheet**: a decision table (what you want → which pack → which skill) plus 71 distilled skills across 6 open-source AI skill packs (scottstts graphics, MengTo's Vesper Fall set, Mint MCP, majidmanzarpour's game skills, img2threejs, GameBlocks), extracted from each repo's actual SKILL.md contents.
-- **`workflow.html`** — the **Game Specification Forge**: a local-first, 12-step workflow with 92 product/technical decisions, automatic Three.js resource and skill routing, draft persistence/import/export, baseline/risk and dependency preflight, launcher-vs-best-effort spend/token/time limits, and a self-contained Gauntlet Loop handoff.
+- **`workflow.html`** — the **Game Specification Forge**: a local-first, 12-step workflow with 92 product/technical decisions, contextual “I'm Feeling Lucky” suggestions derived from earlier stages, automatic Three.js resource and skill routing, draft persistence/import/export, baseline/risk and dependency preflight, launcher-vs-best-effort spend/token/time limits, and a self-contained Gauntlet Loop handoff. Suggestions run entirely in the browser, fill only unanswered fields, and remain editable.
 
 ## 📦 What's inside
 
@@ -45,6 +45,7 @@ build.py        # Fetches live GitHub star counts + renders index.html
 build_assets.py # Fetches og:image thumbnails per site + renders assets.html
 build_cheatsheet.py # Renders cheatsheet.html from cheatsheet.json
 build_workflow.py # Renders the local-first interactive workflow.html
+tests/workflow_suggestions.test.js # Contextual suggestion behavior and schema checks
 index.html      # Generated full catalog (served via GitHub Pages)
 assets.html     # Generated visual asset browser (served via GitHub Pages)
 cheatsheet.html # Generated agent skills cheat sheet (served via GitHub Pages)
