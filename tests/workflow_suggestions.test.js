@@ -148,6 +148,15 @@ assert.equal(onlineTechnical.networking, 'Authoritative online multiplayer', 'te
 assert.equal(api.validatePatch(5, canonicalOnline), true, 'canonical online contract satisfies the workflow schema');
 assert.equal(api.validatePatch(7, onlineTechnical), true, 'online technical suggestion satisfies the workflow schema');
 
+api.reset({networking: 'Authoritative online multiplayer'});
+const networkingFirstLoop = api.suggest(3);
+const networkingFirstSystems = api.suggest(5);
+assert.ok(networkingFirstLoop.modes.includes('Online co-op'), 'authoritative networking infers a consistent online mode when modes are unanswered');
+assert.ok(networkingFirstSystems.systems.includes('Online multiplayer'), 'authoritative networking infers the online system when systems are unanswered');
+assert.equal(typeof networkingFirstSystems.multiplayerContract, 'string', 'authoritative networking receives its required multiplayer contract');
+for (let stepIndex = 0; stepIndex < 12; stepIndex += 1) api.apply(stepIndex);
+assert.equal(api.issueCount(), 0, 'a networking-first imported draft reaches export-ready state');
+
 api.reset();
 for (let stepIndex = 0; stepIndex < 12; stepIndex += 1) {
   const patch = api.apply(stepIndex);
